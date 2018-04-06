@@ -1,5 +1,7 @@
-export default {
-  testconfig: {
-    foo: 'bar'
-  }
-}
+
+module.exports.testconfig = {
+
+  foo: 'bar'
+
+};
+

@@ -1,3 +1,4 @@
-export default (req, res, next) => {
 
-}
+module.exports = function testPolicy(req, res, next) {
+  return next();
+};

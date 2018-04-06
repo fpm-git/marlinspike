@@ -4,9 +4,7 @@
   "description": "Superpowers for your Sails.js Hooks",
   "main": "dist/marlinspike.js",
   "scripts": {
-    "test": "gulp && mocha --reporter spec --compilers js:babel/register",
-    "prepublish": "gulp",
-    "prepare": "gulp"
+    "test": "mocha --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -29,17 +27,14 @@
   },
   "homepage": "https://github.com/tjwebb/marlinspike",
   "dependencies": {
-    "gulp": "^3.9.0",
-    "lodash": "^3.10.1",
-    "require-all": "^2.0.0"
+    "lodash": "^4.17.5",
+    "require-all": "^2.2.0"
   },
   "devDependencies": {
-    "babel": "^5.8.21",
-    "gulp-babel": "^5.2.0",
-    "mocha": "^2.2.5",
-    "sails": "balderdashy/sails",
-    "sails-hook-orm": "^1.0.9"
     "eslint": "^4.19.1",
+    "mocha": "^5.0.5",
+    "sails": "^1.0.0",
+    "sails-hook-orm": "^2.0.0"
   },
   "bundledDependencies": [
     "lodash",

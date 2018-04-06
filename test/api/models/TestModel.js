@@ -1,5 +1,8 @@
-export default {
+
+module.exports = {
+
   attributes: {
     id: 'integer'
   }
-}
+
+};

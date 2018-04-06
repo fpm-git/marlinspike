@@ -1,5 +1,8 @@
-export default {
+
+module.exports = {
+
   action() {
-    return 'controllertest'
+    return 'controllertest';
   }
-}
+
+};

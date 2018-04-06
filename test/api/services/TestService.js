@@ -1,5 +1,8 @@
-export default {
-  method () {
-    return 'servicetest'
+
+module.exports = {
+
+  method() {
+    return 'servicetest';
   }
-}
+
+};

@@ -1,88 +1,89 @@
-import assert from 'assert'
-import _ from 'lodash'
 
-import Marlinspike from '../'
-import TestHook from './api/hooks/testhook'
+const assert = require('assert');
+const _ = require('lodash');
+
+const Marlinspike = require('../lib/marlinspike');
+const TestHook = require('./api/hooks/testhook');
 
 describe('Marlinspike', () => {
   describe('#constructor', () => {
     it('empty hook should be constructable', () => {
-      let spike = new TestHook(global.sails)
-    })
-  })
+      const spike = new TestHook(global.sails);
+    });
+  });
 
   describe('#createSailsHook', () => {
     it('should return a valid sails hook', () => {
-      let HookDefinition = Marlinspike.createSailsHook(TestHook)
-      let hook = HookDefinition(global.sails)
+      const HookDefinition = Marlinspike.createSailsHook(TestHook);
+      const hook = HookDefinition(global.sails);
 
-      assert(_.isFunction(HookDefinition))
-      assert(_.isObject(hook))
+      assert(_.isFunction(HookDefinition));
+      assert(_.isObject(hook));
 
-      assert(_.isFunction(hook.defaults))
-      assert(_.isFunction(hook.configure))
-      assert(_.isFunction(hook.initialize))
-      assert(_.isObject(hook.routes))
-    })
+      assert(_.isFunction(hook.defaults));
+      assert(_.isFunction(hook.configure));
+      assert(_.isFunction(hook.initialize));
+      assert(_.isObject(hook.routes));
+    });
     it('should extend controllers', () => {
-      let HookDefinition = Marlinspike.createSailsHook(TestHook)
-      let hook = HookDefinition(global.sails)
+      const HookDefinition = Marlinspike.createSailsHook(TestHook);
+      const hook = HookDefinition(global.sails);
 
-      hook.configure()
+      hook.configure();
 
-      assert(global.sails.controllers.test)
-    })
+      assert(global.sails.controllers.test);
+    });
     it('should extend services', () => {
-      let HookDefinition = Marlinspike.createSailsHook(TestHook)
-      let hook = HookDefinition(global.sails)
+      const HookDefinition = Marlinspike.createSailsHook(TestHook);
+      const hook = HookDefinition(global.sails);
 
-      hook.configure()
+      hook.configure();
 
-      assert(global.sails.services.testservice)
-    })
+      assert(global.sails.services.testservice);
+    });
     it('should extend models', done => {
-      let HookDefinition = Marlinspike.createSailsHook(TestHook)
-      let hook = HookDefinition(global.sails)
+      const HookDefinition = Marlinspike.createSailsHook(TestHook);
+      const hook = HookDefinition(global.sails);
 
-      hook.configure()
+      hook.configure();
 
-      global.sails.after('hook:orm:loaded', function () {
-        assert(global.sails.models.testmodel)
-        done()
-      })
-    })
+      global.sails.after('hook:orm:loaded', () => {
+        assert(global.sails.models.testmodel);
+        done();
+      });
+    });
     it('should extend policies', done => {
-      let HookDefinition = Marlinspike.createSailsHook(TestHook)
-      let hook = HookDefinition(global.sails)
+      const HookDefinition = Marlinspike.createSailsHook(TestHook);
+      const hook = HookDefinition(global.sails);
 
-      hook.configure()
-      global.sails.after('hook:http:loaded', function () {
-        assert(_.isFunction(global.sails.hooks.policies.middleware.testpolicy))
-        assert(_.isFunction(global.sails.middleware.policies.testpolicy))
-        done()
-      })
-    })
+      hook.configure();
+      global.sails.after('hook:http:loaded', () => {
+        assert(_.isFunction(global.sails.hooks.policies.middleware.testpolicy));
+        assert(_.isFunction(global.sails.middleware.policies.testpolicy));
+        done();
+      });
+    });
     it('should extend sails.config', () => {
-      let HookDefinition = Marlinspike.createSailsHook(TestHook)
-      let hook = HookDefinition(global.sails)
+      const HookDefinition = Marlinspike.createSailsHook(TestHook);
+      const hook = HookDefinition(global.sails);
 
-      hook.configure()
+      hook.configure();
 
-      assert.equal(global.sails.config.testconfig.foo, 'bar')
-    })
+      assert.equal(global.sails.config.testconfig.foo, 'bar');
+    });
     it('should merge sails.config defaults', () => {
       global.sails.config.testconfig = {
         foo: 'baz',
         bar: 1
-      }
+      };
 
-      let HookDefinition = Marlinspike.createSailsHook(TestHook)
-      let hook = HookDefinition(global.sails)
+      const HookDefinition = Marlinspike.createSailsHook(TestHook);
+      const hook = HookDefinition(global.sails);
 
-      hook.configure()
+      hook.configure();
 
-      assert.equal(global.sails.config.testconfig.foo, 'baz')
-      assert.equal(global.sails.config.testconfig.bar, 1)
-    })
-  })
-})
+      assert.equal(global.sails.config.testconfig.foo, 'baz');
+      assert.equal(global.sails.config.testconfig.bar, 1);
+    });
+  });
+});

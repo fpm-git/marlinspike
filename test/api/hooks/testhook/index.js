@@ -1,7 +1,10 @@
-import Marlinspike from '../../../../'
 
-export default class TestHook extends Marlinspike {
+const Marlinspike = require('../../../../lib/marlinspike');
+
+module.exports = class TestHook extends Marlinspike {
+
   constructor (sails) {
-    super(sails, module)
+    super(sails, module);
   }
-}
+
+};

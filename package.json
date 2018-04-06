@@ -39,6 +39,7 @@
     "mocha": "^2.2.5",
     "sails": "balderdashy/sails",
     "sails-hook-orm": "^1.0.9"
+    "eslint": "^4.19.1",
   },
   "bundledDependencies": [
     "lodash",

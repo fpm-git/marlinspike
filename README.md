@@ -5,26 +5,26 @@
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![Code Climate][codeclimate-image]][codeclimate-url]
 
-Superpowers for your [Sails.js](http://sailsjs.org) Hooks.
+Superpowers for your [Sails.js](https://sailsjs.org) Hooks.
 
 ## Features
-- Makes it easy to build and maintain Sails Hooks as separate projects
-- Magically extend Sails apps with additional Model, Controllers, Services.
+- Makes it easy to build and maintain Sails Hooks as separate projects.
+- Magically extend Sails apps with additional Models, Controllers, and Services.
 
 ## Compatibility
 - Sails.js 0.12 and newer
-- node.js 0.12 and newer
+- Node.js 8.0 and newer
 
 ## Install
 
 ```sh
-$ npm install marlinspike --save
+$ npm install git+ssh://git@github.com/fpm-git/marlinspike.git --save
 ```
 
 ## Usage
 ```js
 // config/customhook.js
-export const customhook = {
+module.exports.customhook = {
   /**
    * Load hook into sails.hooks.custom
    */
@@ -61,30 +61,42 @@ export const customhook = {
 
 ```js
 // api/hooks/customhook.js
-import Marlinspike from 'marlinspike'
+const Marlinspike = require('marlinspike');
 
 class CustomHook extends Marlinspike {
-  defaults (overrides) {
-    // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/defaults#?using-defaults-as-a-function
-  },
 
-  configure () {
-    // this.sails = sails
-    // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/configure
-  },
-
-  initialize (next) {
-    // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/initialize
-  },
-
-  routes () {
-    return {
-      // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/routes
-    }
+  constructor(sails) {
+    super(sails, module);
   }
+
+  initialize(done) {
+    // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/initialize
+    return done();
+  }
+
+  configure() {
+    // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/configure
+  }
+
+  defaults() {
+    // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/defaults#?using-defaults-as-a-function
+  }
+
+  routes() {
+    // http://sailsjs.org/documentation/concepts/extending-sails/hooks/hook-specification/routes
+    return {
+      before: {
+        // Put here any route handlers which should run BEFORE user-defined routes.
+      },
+      after: {
+        // Put here any route handlers which should run AFTER user-defined routes.
+      }
+    };
+  }
+
 }
 
-export default Marlinspike.createSailsHook(CustomHook)
+module.exports = Marlinspike.createSailsHook(CustomHook);
 ```
 
 ## License
